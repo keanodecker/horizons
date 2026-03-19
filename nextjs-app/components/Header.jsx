@@ -30,7 +30,7 @@ const Header = () => {
     { name: 'Über Uns', path: '/uber-uns' },
     { name: 'Dekoration', path: '/dekoration' },
     { name: 'Galerie', path: '/galerie' },
-    { name: 'Events', path: '/events' },
+    { name: 'Blog', path: '/blog' },
   ];
 
   const serviceLinks = [

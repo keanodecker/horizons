@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Facebook, Award, Layers, Gift } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Instagram, Award, Layers, Gift } from 'lucide-react';
 
 const Footer = () => {
   const balloons = [
@@ -129,13 +129,13 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-gray-900 mb-4">Folgen Sie uns</h4>
             <div className="flex gap-4 mb-6">
               <a
-                href="https://www.facebook.com/profile.php?id=100066701207784"
+                href="https://www.instagram.com/ballonkunst_lahr/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300 hover:scale-110"
-                aria-label="Facebook"
+                aria-label="Instagram"
               >
-                <Facebook className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
             </div>
             <div className="space-y-2">
