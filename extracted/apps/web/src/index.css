@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 330 81% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 142 76% 73%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 48 96% 53%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 330 81% 60%;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 330 81% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 142 76% 73%;
+    --muted-foreground: 240 4.8% 95.9%;
+    --accent: 48 96% 53%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 330 81% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* CSS Balloons */
+.balloon-wrapper {
+  position: absolute;
+  bottom: -150px;
+  animation: float-up linear infinite;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.balloon-string {
+  width: 2px;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Round Balloon */
+.balloon-shape-round {
+  width: 60px;
+  height: 75px;
+  background-color: currentColor;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  position: relative;
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.15), inset 5px 5px 10px rgba(255,255,255,0.4);
+}
+.balloon-shape-round::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 10px solid currentColor;
+}
+
+/* Heart Balloon */
+.balloon-shape-heart {
+  width: 60px;
+  height: 60px;
+  background-color: currentColor;
+  position: relative;
+  transform: rotate(-45deg);
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.15);
+  margin-top: 15px;
+}
+.balloon-shape-heart::before,
+.balloon-shape-heart::after {
+  content: '';
+  width: 60px;
+  height: 60px;
+  background-color: currentColor;
+  border-radius: 50%;
+  position: absolute;
+}
+.balloon-shape-heart::before {
+  top: -30px;
+  left: 0;
+  box-shadow: inset 5px 5px 10px rgba(255,255,255,0.3);
+}
+.balloon-shape-heart::after {
+  top: 0;
+  left: 30px;
+  box-shadow: inset 0px 5px 10px rgba(255,255,255,0.2);
+}
+.balloon-shape-heart .balloon-string {
+  transform: rotate(45deg) translateX(-50%);
+  transform-origin: top left;
+  top: 100%;
+  left: 100%;
+}
+
+/* Star Balloon */
+.balloon-shape-star {
+  width: 70px;
+  height: 70px;
+  background-color: currentColor;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  position: relative;
+}
+.balloon-shape-star::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.1) 100%);
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+  }
+  33% {
+    transform: translateY(-40vh) rotate(10deg) translateX(20px);
+  }
+  66% {
+    transform: translateY(-80vh) rotate(-5deg) translateX(-15px);
+  }
+  100% {
+    transform: translateY(-120vh) rotate(5deg) translateX(10px);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(-10px) translateX(-10px); }
+  75% { transform: translateY(-25px) translateX(5px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(5deg); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
