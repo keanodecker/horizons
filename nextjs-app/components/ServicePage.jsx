@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Layers, Clock, Image as ImageIcon } from 'lucide-react';
+import { Award, Layers, Clock, Leaf, Image as ImageIcon } from 'lucide-react';
 
 const ServicePage = ({ serviceId, title, description, heroImage }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -46,7 +46,7 @@ const ServicePage = ({ serviceId, title, description, heroImage }) => {
       {/* Business Info Banner */}
       <section className="bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 max-w-7xl py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
             <div className="flex flex-col items-center justify-center p-4">
               <Award className="w-8 h-8 text-primary mb-2" />
               <span className="font-semibold text-gray-900">19 Jahre Erfahrung</span>
@@ -56,6 +56,11 @@ const ServicePage = ({ serviceId, title, description, heroImage }) => {
               <Layers className="w-8 h-8 text-secondary mb-2" />
               <span className="font-semibold text-gray-900">600+ Themenballons</span>
               <span className="text-sm text-gray-500">verschiedene zur Auswahl</span>
+            </div>
+            <div className="flex flex-col items-center justify-center p-4">
+              <Leaf className="w-8 h-8 text-green-600 mb-2" />
+              <span className="font-semibold text-gray-900">Nachhaltigkeit & Umwelt</span>
+              <span className="text-sm text-gray-500">naturabbaubare Ballons</span>
             </div>
             <div className="flex flex-col items-center justify-center p-4">
               <Clock className="w-8 h-8 text-accent mb-2" />

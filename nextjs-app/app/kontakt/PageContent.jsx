@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '49XXXXXXXXXX'; // TODO: Nummer hier eintragen z.B. 4917612345678
+const WHATSAPP_NUMBER = '491781510567';
 
 export default function ContactPage() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hallo%20Ballonkunst%20Lahr%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Ballons!`;

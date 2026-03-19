@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, MapPin, Phone, Mail, Award, Layers, Clock, Leaf, CalendarDays } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Mail, Award, Layers, Clock, Leaf, CalendarDays, MessageCircle } from 'lucide-react';
 
 const balloonColors = [
   'text-pink-400', 'text-blue-400', 'text-yellow-400',
@@ -103,7 +103,7 @@ export default function HomePage() {
                 href="/kontakt"
                 className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-bold text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                Kontakt <ArrowRight className="ml-2 w-5 h-5" />
+                Jetzt vorbeikommen <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <Link
                 href="/anlasse"
@@ -364,10 +364,10 @@ export default function HomePage() {
                 <a href="tel:+4978213270082" className="hover:underline">+49 7821 327082</a>
               </div>
               <div className="flex flex-col items-center">
-                <Mail className="w-12 h-12 mb-4" />
-                <h3 className="text-xl font-bold mb-2">E-Mail</h3>
-                <a href="mailto:info@ballonkunst-lahr.de" className="hover:underline">
-                  info@ballonkunst-lahr.de
+                <MessageCircle className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-bold mb-2">WhatsApp</h3>
+                <a href="https://wa.me/491781510567?text=Hallo%20Ballonkunst%20Lahr%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Ballons!" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  +49 178 1510567
                 </a>
               </div>
             </div>
@@ -376,7 +376,7 @@ export default function HomePage() {
               href="/kontakt"
               className="inline-flex items-center bg-white text-primary hover:bg-gray-100 font-bold text-lg px-12 py-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
             >
-              Jetzt Termin vereinbaren <ArrowRight className="ml-2 w-5 h-5" />
+              Kontakt <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </motion.div>
         </div>

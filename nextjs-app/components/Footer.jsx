@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Instagram, Award, Layers, Gift } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Instagram, Award, Layers, Gift, Leaf } from 'lucide-react';
 
 const Footer = () => {
   const balloons = [
@@ -53,6 +53,10 @@ const Footer = () => {
               <div className="flex items-center gap-2 text-sm text-gray-700">
                 <Layers className="w-4 h-4 text-secondary" />
                 <span className="font-semibold">600+ Themenballons</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <Leaf className="w-4 h-4 text-green-600" />
+                <span className="font-semibold">Nachhaltigkeit & Umwelt</span>
               </div>
               <div className="flex items-start gap-2 text-sm text-gray-700">
                 <Gift className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
