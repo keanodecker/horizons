@@ -30,7 +30,7 @@ const Header = () => {
     { name: 'Über Uns', path: '/uber-uns' },
     { name: 'Dekoration', path: '/dekoration' },
     { name: 'Galerie', path: '/galerie' },
-    { name: 'Events', path: '/events' },
+    { name: 'Blog', path: '/blog' },
   ];
 
   const serviceLinks = [
@@ -58,7 +58,7 @@ const Header = () => {
           <Link href="/" className="flex items-center group">
             <img
               src="https://horizons-cdn.hostinger.com/910c39d7-e020-4090-a4fa-0fc83bdc8598/ee4d9a60f6e9d6601c17357f1d78081f.png"
-              alt="Ballonkunst Herzog Logo"
+              alt="Ballonkunst Lahr Logo"
               className="h-10 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </Link>

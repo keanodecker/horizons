@@ -2,7 +2,7 @@ import { Shield, Lock, Database, Mail } from 'lucide-react';
 
 export const metadata = {
   title: 'Datenschutzerklärung',
-  description: 'Datenschutzerklärung von Ballonkunst Herzog in Lahr.',
+  description: 'Datenschutzerklärung von Ballonkunst Lahr in Lahr.',
 };
 
 export default function DatenschutzPage() {
@@ -53,7 +53,7 @@ export default function DatenschutzPage() {
               <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 my-4">
                 <p className="font-semibold">Doris Herzog</p>
-                <p>Ballonkunst Herzog</p>
+                <p>Ballonkunst Lahr</p>
                 <p>Kaiserstr. 25</p>
                 <p>77933 Lahr</p>
                 <p className="mt-2">Telefon: +49 (0) 7821 32 70 82</p>

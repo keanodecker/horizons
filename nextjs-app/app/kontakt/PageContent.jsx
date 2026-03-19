@@ -1,29 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
 
+const WHATSAPP_NUMBER = '49XXXXXXXXXX'; // TODO: Nummer hier eintragen z.B. 4917612345678
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', service: '', message: '' });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', service: '', message: '' });
-    }, 1000);
-  };
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hallo%20Ballonkunst%20Lahr%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Ballons!`;
 
   return (
     <div className="pt-32 pb-20 bg-gray-50 min-h-screen">
@@ -42,8 +25,8 @@ export default function ContactPage() {
             transition={{ delay: 0.1 }}
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
-            Haben Sie Fragen zu unseren Ballons oder möchten Sie eine Dekoration vorbestellen? Schreiben
-            Sie uns oder besuchen Sie uns direkt in Lahr.
+            Haben Sie Fragen zu unseren Ballons oder möchten Sie eine Dekoration vorbestellen?
+            Schreiben Sie uns einfach auf WhatsApp – wir antworten schnell!
           </motion.p>
         </div>
 
@@ -59,7 +42,7 @@ export default function ContactPage() {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps Standort Ballonkunst Herzog"
+                title="Google Maps Standort Ballonkunst Lahr"
                 className="absolute inset-0"
               ></iframe>
             </div>
@@ -95,125 +78,42 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="p-8 md:p-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Schreiben Sie uns</h2>
+          {/* WhatsApp CTA */}
+          <div className="p-8 md:p-12 flex flex-col items-center justify-center text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="w-full"
+            >
+              <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <MessageCircle className="w-12 h-12 text-green-500" />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Schreiben Sie uns auf WhatsApp
+              </h2>
+              <p className="text-gray-600 leading-relaxed mb-8 max-w-sm mx-auto">
+                Für Bestellungen, Anfragen oder Fragen – wir sind auf WhatsApp erreichbar und
+                antworten so schnell wie möglich!
+              </p>
 
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-12"
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full max-w-xs mx-auto"
               >
-                <div className="text-6xl mb-4">✅</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Vielen Dank!</h3>
-                <p className="text-gray-600">
-                  Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.
-                </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-6 px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-colors"
-                >
-                  Neue Nachricht senden
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                    Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Ihr vollständiger Name"
-                    required
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
-                  />
-                </div>
+                <MessageCircle className="w-6 h-6" />
+                WhatsApp öffnen
+              </a>
 
-                <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    E-Mail <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="ihre.email@beispiel.de"
-                    required
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-700">
-                    Anlass (Optional)
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors bg-white"
-                  >
-                    <option value="">Bitte wählen Sie einen Anlass</option>
-                    <option value="geburtstag">Geburtstag</option>
-                    <option value="hochzeit">Hochzeit</option>
-                    <option value="geburt-baby">Geburt &amp; Baby</option>
-                    <option value="schulanfang">Schulanfang</option>
-                    <option value="kindergeburtstag">Kindergeburtstag</option>
-                    <option value="taufe">Taufe</option>
-                    <option value="baby-shower">Baby Shower</option>
-                    <option value="abitur-konfirmation">Abitur &amp; Konfirmation</option>
-                    <option value="halloween">Halloween</option>
-                    <option value="weihnachten">Weihnachten</option>
-                    <option value="andere">Andere</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                    Nachricht <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Wie können wir Ihnen helfen?"
-                    rows={5}
-                    required
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold py-4 text-lg rounded-lg shadow-lg transition-all duration-300 hover:scale-[1.02] disabled:opacity-70"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                      />
-                      Wird gesendet...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" /> Nachricht senden
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+              <p className="text-sm text-gray-400 mt-6">
+                Oder rufen Sie uns an:{' '}
+                <a href="tel:+4978213270082" className="text-primary hover:underline font-medium">
+                  +49 (0) 7821 32 70 82
+                </a>
+              </p>
+            </motion.div>
           </div>
         </div>
       </div>

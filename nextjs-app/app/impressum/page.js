@@ -2,7 +2,7 @@ import { Scale, MapPin, Phone, Mail, FileText } from 'lucide-react';
 
 export const metadata = {
   title: 'Impressum',
-  description: 'Impressum und rechtliche Hinweise von Ballonkunst Herzog in Lahr.',
+  description: 'Impressum und rechtliche Hinweise von Ballonkunst Lahr in Lahr.',
 };
 
 export default function ImpressumPage() {
@@ -22,7 +22,7 @@ export default function ImpressumPage() {
             </div>
             <div className="space-y-2 text-gray-700">
               <p className="font-semibold text-lg">Doris Herzog</p>
-              <p>Ballonkunst Herzog</p>
+              <p>Ballonkunst Lahr</p>
               <div className="flex items-start gap-2 mt-4">
                 <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Facebook, Award, Layers, Gift } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Instagram, Award, Layers, Gift } from 'lucide-react';
 
 const Footer = () => {
   const balloons = [
@@ -37,7 +37,7 @@ const Footer = () => {
               <Link href="/" className="inline-block group">
                 <img
                   src="https://horizons-cdn.hostinger.com/910c39d7-e020-4090-a4fa-0fc83bdc8598/ee4d9a60f6e9d6601c17357f1d78081f.png"
-                  alt="Ballonkunst Herzog Logo"
+                  alt="Ballonkunst Lahr Logo"
                   className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
@@ -129,13 +129,13 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-gray-900 mb-4">Folgen Sie uns</h4>
             <div className="flex gap-4 mb-6">
               <a
-                href="https://www.facebook.com/profile.php?id=100066701207784"
+                href="https://www.instagram.com/ballonkunst_lahr/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300 hover:scale-110"
-                aria-label="Facebook"
+                aria-label="Instagram"
               >
-                <Facebook className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
             </div>
             <div className="space-y-2">
@@ -145,13 +145,16 @@ const Footer = () => {
               <Link href="/datenschutz" className="block text-gray-600 hover:text-primary transition-colors">
                 Datenschutzerklärung
               </Link>
+              <Link href="/partner" className="block text-gray-600 hover:text-primary transition-colors">
+                Partner
+              </Link>
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-200 text-center">
           <p className="text-gray-600">
-            © {new Date().getFullYear()} Ballonkunst Herzog. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Ballonkunst Lahr. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>

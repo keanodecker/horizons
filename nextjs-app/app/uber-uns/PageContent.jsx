@@ -32,7 +32,7 @@ export default function AboutPage() {
         <div className="relative container mx-auto px-4 max-w-7xl text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Über Ballonkunst Herzog
+              Über Ballonkunst Lahr
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Ihr beliebtes Spezialgeschäft für Ballons und kreative Geschenkideen im Herzen von Lahr
@@ -54,7 +54,7 @@ export default function AboutPage() {
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Unsere Geschichte</h2>
               <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  Willkommen bei Ballonkunst Herzog – Ihrem Spezialgeschäft für Ballons und kreative
+                  Willkommen bei Ballonkunst Lahr – Ihrem Spezialgeschäft für Ballons und kreative
                   Geschenkideen in Lahr! Seit vielen Jahren sind wir stolz darauf, die Menschen in unserer
                   Region mit bunten Ballons und einzigartigen Dekorationen zu begeistern.
                 </p>
@@ -162,7 +162,7 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Warum Ballonkunst Herzog?
+              Warum Ballonkunst Lahr?
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

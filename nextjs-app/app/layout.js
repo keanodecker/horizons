@@ -4,11 +4,11 @@ import Footer from '@/components/Footer';
 
 export const metadata = {
   title: {
-    default: 'Ballonkunst Herzog - Ballons & Geschenkideen in Lahr',
-    template: '%s | Ballonkunst Herzog',
+    default: 'Ballonkunst Lahr - Ballons & Geschenkideen in Lahr',
+    template: '%s | Ballonkunst Lahr',
   },
   description:
-    'Ballonkunst Herzog in Lahr – Ihr Spezialist für Ballons, Luftballons, Ballondekoration und kreative Geschenkideen für jeden Anlass.',
+    'Ballonkunst Lahr in Lahr – Ihr Spezialist für Ballons, Luftballons, Ballondekoration und kreative Geschenkideen für jeden Anlass.',
   keywords: [
     'Ballons Lahr',
     'Luftballons Lahr',

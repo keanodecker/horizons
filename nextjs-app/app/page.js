@@ -94,7 +94,7 @@ export default function HomePage() {
               <span className="text-primary">perfekten Ballon</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Willkommen bei Ballonkunst Herzog – Ihrem Spezialgeschäft für Ballons und kreative
+              Willkommen bei Ballonkunst Lahr – Ihrem Spezialgeschäft für Ballons und kreative
               Geschenkideen im Herzen von Lahr. Wir bringen Farbe in Ihr Leben!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -159,7 +159,7 @@ export default function HomePage() {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Unsere Ballons</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Bei Ballonkunst Herzog finden Sie eine riesige Auswahl an Ballons für jeden Anlass. Von
+              Bei Ballonkunst Lahr finden Sie eine riesige Auswahl an Ballons für jeden Anlass. Von
               klassischen Latexballons über elegante Folienballons bis hin zu personalisierten Ballons mit
               Beschriftung – wir haben alles, was Ihr Herz begehrt.
             </p>
