@@ -21,8 +21,8 @@ export default function ImpressumPage() {
               <h2 className="text-2xl font-bold text-gray-900">Angaben gemäß § 5 TMG</h2>
             </div>
             <div className="space-y-2 text-gray-700">
-              <p className="font-semibold text-lg">Doris Herzog</p>
-              <p>Ballonkunst Lahr</p>
+              <p className="font-semibold text-lg">Ballonkunst Lahr</p>
+              <p>Inh. Sezer Ülker</p>
               <div className="flex items-start gap-2 mt-4">
                 <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
@@ -60,7 +60,7 @@ export default function ImpressumPage() {
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
               <br />
               <span className="font-mono bg-gray-100 px-2 py-1 rounded mt-2 inline-block">
-                DE 814807325
+                DE2835 013 19
               </span>
             </p>
           </div>

@@ -134,7 +134,7 @@ export default function DecorationPage() {
               href="/kontakt"
               className="inline-block bg-white text-primary hover:bg-gray-100 font-bold text-lg px-12 py-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
             >
-              Jetzt Termin vereinbaren
+              Kontakt
             </Link>
           </motion.div>
         </div>
