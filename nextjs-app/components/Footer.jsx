@@ -85,10 +85,10 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
                 <a
-                  href="mailto:info@ballonkunst-herzog.de"
+                  href="mailto:info@ballonkunst-lahr.de"
                   className="text-gray-700 hover:text-accent transition-colors"
                 >
-                  info@ballonkunst-herzog.de
+                  info@ballonkunst-lahr.de
                 </a>
               </div>
             </div>

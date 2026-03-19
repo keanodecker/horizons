@@ -44,6 +44,7 @@ const Header = () => {
     { name: 'Abitur & Konfirmation', path: '/services/abitur-konfirmation' },
     { name: 'Halloween', path: '/services/halloween' },
     { name: 'Weihnachten', path: '/services/weihnachten' },
+    { name: 'Liebe & Valentinstag', path: '/services/liebe-valentinstag' },
   ];
 
   return (

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, MapPin, Phone, Mail, Award, Layers, Clock } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Mail, Award, Layers, Clock, Leaf, CalendarDays } from 'lucide-react';
 
 const balloonColors = [
   'text-pink-400', 'text-blue-400', 'text-yellow-400',
@@ -21,6 +21,7 @@ const occasions = [
   { emoji: '📚', title: 'Abitur & Konfirmation', description: 'Besondere Momente feiern', path: '/services/abitur-konfirmation' },
   { emoji: '🎃', title: 'Halloween', description: 'Gruselige Ballondeko', path: '/services/halloween' },
   { emoji: '🎄', title: 'Weihnachten', description: 'Festliche Weihnachtsballons', path: '/services/weihnachten' },
+  { emoji: '❤️', title: 'Liebe & Valentinstag', description: 'Romantische Ballons für besondere Momente', path: '/services/liebe-valentinstag' },
 ];
 
 const containerVariants = {
@@ -102,7 +103,7 @@ export default function HomePage() {
                 href="/kontakt"
                 className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-bold text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                Jetzt vorbeikommen <ArrowRight className="ml-2 w-5 h-5" />
+                Kontakt <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <Link
                 href="/anlasse"
@@ -121,7 +122,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100"
+          className="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100"
         >
           <div className="flex flex-col items-center text-center px-4">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
@@ -137,7 +138,14 @@ export default function HomePage() {
             <h3 className="text-xl font-bold text-gray-900 mb-2">600+ Themenballons</h3>
             <p className="text-gray-600">riesige Auswahl für jeden Anlass</p>
           </div>
-          <div className="flex flex-col items-center text-center px-4 pt-8 md:pt-0">
+          <div className="flex flex-col items-center text-center px-4 pt-8 lg:pt-0">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+              <Leaf className="w-8 h-8 text-green-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Nachhaltigkeit & Umwelt</h3>
+            <p className="text-gray-600">Auch naturabbaubare Ballons erhältlich</p>
+          </div>
+          <div className="flex flex-col items-center text-center px-4 pt-8 lg:pt-0">
             <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4">
               <Clock className="w-8 h-8 text-accent" />
             </div>
@@ -145,6 +153,26 @@ export default function HomePage() {
             <p className="text-gray-600 font-medium text-primary">Bitte rechtzeitig vorbestellen!</p>
           </div>
         </motion.div>
+      </section>
+
+      {/* Holiday Info Box */}
+      <section className="py-10 bg-white">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-yellow-50 border border-yellow-300 rounded-2xl p-6 flex flex-col items-center text-center gap-3 shadow-sm"
+          >
+            <div className="flex items-center gap-2 text-yellow-700">
+              <CalendarDays className="w-6 h-6" />
+              <span className="font-bold text-lg">Aktuelle Hinweise</span>
+            </div>
+            <p className="text-yellow-800 leading-relaxed">
+              Bitte beachten Sie unsere geänderten Öffnungszeiten an Feiertagen. Für besondere Anlässe empfehlen wir eine <strong>rechtzeitige Vorbestellung</strong> (mindestens 2–3 Tage im Voraus).
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* About Section */}
@@ -190,7 +218,7 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
           >
             {occasions.map((occasion, index) => (
               <Link href={occasion.path} key={index}>
@@ -209,14 +237,6 @@ export default function HomePage() {
             ))}
           </motion.div>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/galerie"
-              className="inline-flex items-center bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
-            >
-              Mehr Anzeigen <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -346,8 +366,8 @@ export default function HomePage() {
               <div className="flex flex-col items-center">
                 <Mail className="w-12 h-12 mb-4" />
                 <h3 className="text-xl font-bold mb-2">E-Mail</h3>
-                <a href="mailto:info@ballonkunst-herzog.de" className="hover:underline">
-                  info@ballonkunst-herzog.de
+                <a href="mailto:info@ballonkunst-lahr.de" className="hover:underline">
+                  info@ballonkunst-lahr.de
                 </a>
               </div>
             </div>

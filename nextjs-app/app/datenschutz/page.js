@@ -57,7 +57,7 @@ export default function DatenschutzPage() {
                 <p>Kaiserstr. 25</p>
                 <p>77933 Lahr</p>
                 <p className="mt-2">Telefon: +49 (0) 7821 32 70 82</p>
-                <p>E-Mail: info@ballonkunst-herzog.de</p>
+                <p>E-Mail: info@ballonkunst-lahr.de</p>
               </div>
             </div>
           </div>

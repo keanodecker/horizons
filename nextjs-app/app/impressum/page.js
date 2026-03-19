@@ -45,8 +45,8 @@ export default function ImpressumPage() {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-gray-400" />
-                <a href="mailto:info@ballonkunst-herzog.de" className="text-primary hover:underline">
-                  info@ballonkunst-herzog.de
+                <a href="mailto:info@ballonkunst-lahr.de" className="text-primary hover:underline">
+                  info@ballonkunst-lahr.de
                 </a>
               </div>
             </div>

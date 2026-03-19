@@ -16,6 +16,7 @@ const occasions = [
   { emoji: '📚', title: 'Abitur & Konfirmation', description: 'Besondere Momente gebührend feiern', details: 'Stilvolle Ballons für wichtige Meilensteine im Leben. Elegante Zahlenballons, Glückwunschballons und festliche Dekorationen für Abitur, Konfirmation und Kommunion.', color: 'from-blue-400 to-purple-400' },
   { emoji: '🎃', title: 'Halloween', description: 'Gruselige und lustige Ballondeko', details: 'Schaurig-schöne Halloween-Ballons mit Kürbissen, Geistern und Fledermäusen. Perfekt für Ihre Halloween-Party in Orange und Schwarz!', color: 'from-orange-500 to-black' },
   { emoji: '🎄', title: 'Weihnachten', description: 'Festliche Weihnachtsballons', details: 'Weihnachtliche Ballons in Rot, Grün und Gold. Von Weihnachtsmann-Ballons über Schneemann-Motive bis zu eleganten Christbaumkugel-Ballons – für eine festliche Atmosphäre.', color: 'from-red-600 to-green-600' },
+  { emoji: '❤️', title: 'Liebe & Valentinstag', description: 'Romantische Ballons für besondere Momente', details: 'Herzballons in Rot und Rosa, personalisierte Liebesballons und romantische Dekorationen für Valentinstag, Hochzeitstag oder einfach um zu zeigen, wie sehr Sie jemanden lieben.', color: 'from-red-400 to-pink-500' },
 ];
 
 export default function OccasionsPage() {
