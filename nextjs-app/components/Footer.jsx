@@ -36,7 +36,7 @@ const Footer = () => {
             <div className="mb-6">
               <Link href="/" className="inline-block group">
                 <img
-                  src="https://horizons-cdn.hostinger.com/910c39d7-e020-4090-a4fa-0fc83bdc8598/ee4d9a60f6e9d6601c17357f1d78081f.png"
+                  src="/logo.png"
                   alt="Ballonkunst Lahr Logo"
                   className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
