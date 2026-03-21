@@ -38,7 +38,7 @@ const Footer = () => {
                 <img
                   src="/logo.jpg"
                   alt="Ballonkunst Lahr Logo"
-                  className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  className="h-32 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
             </div>

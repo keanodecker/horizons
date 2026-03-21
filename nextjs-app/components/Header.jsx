@@ -54,13 +54,13 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-28">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <img
               src="/logo.jpg"
               alt="Ballonkunst Lahr Logo"
-              className="h-10 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              className="h-20 md:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </Link>
 
