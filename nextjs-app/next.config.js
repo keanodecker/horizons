@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'horizons-cdn.hostinger.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'rrblntehwdzyuqlpcshi.supabase.co',
+      },
     ],
   },
 };

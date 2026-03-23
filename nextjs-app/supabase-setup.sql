@@ -3,16 +3,25 @@
 -- Dieses Script einmal im Supabase SQL-Editor ausführen.
 -- ══════════════════════════════════════════════════════════════════
 
+-- 0. Alte Tabellen löschen (falls vorhanden)
+-- ─────────────────────────────────────────────────────────────────
+
+DROP TABLE IF EXISTS content CASCADE;
+DROP TABLE IF EXISTS events CASCADE;
+DROP TABLE IF EXISTS site_settings CASCADE;
+DROP TABLE IF EXISTS news_posts CASCADE;
+DROP TABLE IF EXISTS gallery_images CASCADE;
+
 -- 1. Tabellen erstellen
 -- ─────────────────────────────────────────────────────────────────
 
-CREATE TABLE IF NOT EXISTS site_settings (
+CREATE TABLE site_settings (
   key         TEXT PRIMARY KEY,
   value       TEXT,
   updated_at  TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS news_posts (
+CREATE TABLE news_posts (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title       TEXT NOT NULL,
   content     TEXT,
@@ -21,7 +30,7 @@ CREATE TABLE IF NOT EXISTS news_posts (
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS gallery_images (
+CREATE TABLE gallery_images (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   image_url   TEXT NOT NULL,
   caption     TEXT,
@@ -35,18 +44,9 @@ ALTER TABLE site_settings   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE news_posts       ENABLE ROW LEVEL SECURITY;
 ALTER TABLE gallery_images   ENABLE ROW LEVEL SECURITY;
 
--- Alle Operationen erlauben (anon key reicht für dieses Projekt)
-DO $$ BEGIN
-  CREATE POLICY "allow_all_site_settings"  ON site_settings  FOR ALL USING (true) WITH CHECK (true);
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN
-  CREATE POLICY "allow_all_news_posts"     ON news_posts      FOR ALL USING (true) WITH CHECK (true);
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
-
-DO $$ BEGIN
-  CREATE POLICY "allow_all_gallery_images" ON gallery_images  FOR ALL USING (true) WITH CHECK (true);
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+CREATE POLICY "allow_all_site_settings"  ON site_settings  FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_news_posts"     ON news_posts      FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_gallery_images" ON gallery_images  FOR ALL USING (true) WITH CHECK (true);
 
 -- 3. Standard-Werte einfügen
 -- ─────────────────────────────────────────────────────────────────
@@ -68,14 +68,9 @@ INSERT INTO site_settings (key, value) VALUES
   ('offer_banner_url',      ''),
   ('contact_phone',         '+49 7821 327082'),
   ('contact_email',         'info@ballonkunst-lahr.de'),
-  ('contact_address',       'Kaiserstraße 25, 77933 Lahr')
-ON CONFLICT (key) DO NOTHING;
+  ('contact_address',       'Kaiserstraße 25, 77933 Lahr');
 
 -- 4. Storage Bucket
 -- ─────────────────────────────────────────────────────────────────
 -- Manuell im Supabase Dashboard anlegen:
 -- Storage → "New bucket" → Name: "site-images" → Public: JA
---
--- Danach unter Storage → Policies folgende Policy hinzufügen:
---   Bucket: site-images, Operation: INSERT, Target: anon
---   USING: true   WITH CHECK: true

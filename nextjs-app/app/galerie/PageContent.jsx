@@ -23,13 +23,25 @@ const galleryItems = [
   { id: 12, emoji: '💒', category: 'Hochzeit', label: 'Trauungsdekoration' },
 ];
 
-export default function GalleryPage() {
+export default function GalleryPage({ dbImages = [] }) {
   const [activeFilter, setActiveFilter] = useState('Alle');
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // Merge DB images (real photos) with placeholder items
+  const allItems = [
+    ...dbImages.map((img) => ({
+      id: img.id,
+      imageUrl: img.image_url,
+      label: img.caption || 'Ballondekoration',
+      category: 'Alle',
+      isReal: true,
+    })),
+    ...galleryItems.map((item) => ({ ...item, isReal: false })),
+  ];
+
   const filteredItems = activeFilter === 'Alle'
-    ? galleryItems
-    : galleryItems.filter((item) => item.category === activeFilter);
+    ? allItems
+    : allItems.filter((item) => item.category === activeFilter || item.category === 'Alle');
 
   return (
     <div className="pt-24 min-h-screen bg-gray-50 flex flex-col">
@@ -79,18 +91,31 @@ export default function GalleryPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => setSelectedItem(item)}
-                  className="aspect-square bg-gradient-to-br from-pink-100 via-blue-100 to-yellow-100 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col items-center justify-center"
+                  className="aspect-square rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden relative"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                    {item.emoji}
-                  </div>
-                  <p className="text-sm font-medium text-gray-600 px-2 text-center">{item.label}</p>
-                  <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      {item.category}
-                    </span>
-                  </div>
+                  {item.isReal ? (
+                    <>
+                      <img src={item.imageUrl} alt={item.label} className="w-full h-full object-cover" />
+                      {item.label && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs px-2 py-1 translate-y-full group-hover:translate-y-0 transition-transform">
+                          {item.label}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-pink-100 via-blue-100 to-yellow-100 flex flex-col items-center justify-center">
+                      <div className="text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                        {item.emoji}
+                      </div>
+                      <p className="text-sm font-medium text-gray-600 px-2 text-center">{item.label}</p>
+                      <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                          {item.category}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </AnimatePresence>

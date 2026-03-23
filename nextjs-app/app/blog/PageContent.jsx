@@ -1,10 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen, Instagram } from 'lucide-react';
+import { BookOpen, Instagram, CalendarDays, Image } from 'lucide-react';
 
-
-export default function EventsPage() {
+export default function EventsPage({ posts = [] }) {
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50">
       {/* Hero */}
@@ -30,30 +29,64 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Blog */}
+      {/* Posts */}
       <section className="pb-24">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl shadow-xl p-12 text-center border border-pink-100"
-          >
-            <div className="mb-4">
-              <Instagram className="w-16 h-16 text-pink-300 mx-auto" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Bald gibt es hier Neuigkeiten!</h3>
-            <p className="text-gray-600 mb-6">
-              Folgen Sie uns auf Instagram für aktuelle Bilder, Tipps und Inspirationen.
-            </p>
-            <a
-              href="https://www.instagram.com/ballonkunst_lahr/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary/90 transition-colors shadow-lg"
+        <div className="container mx-auto px-4 max-w-4xl space-y-8">
+          {posts.length > 0 ? (
+            posts.map((post, i) => (
+              <motion.article
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-pink-50"
+              >
+                {post.image_url && (
+                  <div className="w-full h-56 overflow-hidden">
+                    <img
+                      src={post.image_url}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                <div className="p-8">
+                  <div className="flex items-center gap-2 text-gray-400 text-sm mb-3">
+                    <CalendarDays className="w-4 h-4" />
+                    {new Date(post.post_date).toLocaleDateString('de-DE', {
+                      day: '2-digit', month: 'long', year: 'numeric',
+                    })}
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3">{post.title}</h2>
+                  {post.content && (
+                    <p className="text-gray-600 leading-relaxed whitespace-pre-line">{post.content}</p>
+                  )}
+                </div>
+              </motion.article>
+            ))
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="bg-white rounded-2xl shadow-xl p-12 text-center border border-pink-100"
             >
-              Auf Instagram folgen
-            </a>
-          </motion.div>
+              <div className="mb-4">
+                <Instagram className="w-16 h-16 text-pink-300 mx-auto" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Bald gibt es hier Neuigkeiten!</h3>
+              <p className="text-gray-600 mb-6">
+                Folgen Sie uns auf Instagram für aktuelle Bilder, Tipps und Inspirationen.
+              </p>
+              <a
+                href="https://www.instagram.com/ballonkunst_lahr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary/90 transition-colors shadow-lg"
+              >
+                Auf Instagram folgen
+              </a>
+            </motion.div>
+          )}
         </div>
       </section>
     </div>

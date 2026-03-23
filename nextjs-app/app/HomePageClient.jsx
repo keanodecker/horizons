@@ -1,0 +1,381 @@
+'use client';
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight, MapPin, Phone, Mail, Award, Layers, Clock, Leaf, CalendarDays, MessageCircle } from 'lucide-react';
+
+const balloonColors = [
+  'text-pink-400', 'text-blue-400', 'text-yellow-400',
+  'text-green-400', 'text-orange-400', 'text-purple-400',
+];
+const balloonShapes = ['balloon-shape-round', 'balloon-shape-heart', 'balloon-shape-star'];
+
+const occasions = [
+  { emoji: '🎂', title: 'Geburtstag', description: 'Feiern Sie mit bunten Ballons', path: '/services/geburtstag' },
+  { emoji: '💍', title: 'Hochzeit', description: 'Romantische Ballondekoration', path: '/services/hochzeit' },
+  { emoji: '👶', title: 'Geburt & Baby', description: 'Süße Ballons für den Nachwuchs', path: '/services/geburt-baby' },
+  { emoji: '🎒', title: 'Schulanfang', description: 'Motivierende Schulballons', path: '/services/schulanfang' },
+  { emoji: '🎊', title: 'Kindergeburtstag', description: 'Spaß für die Kleinen', path: '/services/kindergeburtstag' },
+  { emoji: '✝️', title: 'Taufe', description: 'Festliche Ballondekoration', path: '/services/taufe' },
+  { emoji: '🚿', title: 'Baby Shower', description: 'Zauberhafte Babyparty-Ballons', path: '/services/baby-shower' },
+  { emoji: '📚', title: 'Abitur & Konfirmation', description: 'Besondere Momente feiern', path: '/services/abitur-konfirmation' },
+  { emoji: '🎃', title: 'Halloween', description: 'Gruselige Ballondeko', path: '/services/halloween' },
+  { emoji: '🎄', title: 'Weihnachten', description: 'Festliche Weihnachtsballons', path: '/services/weihnachten' },
+  { emoji: '❤️', title: 'Liebe & Valentinstag', description: 'Romantische Ballons für besondere Momente', path: '/services/liebe-valentinstag' },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+const balloonPositions = [
+  { left: '8%', duration: '18s', delay: '0s', scale: 0.8 },
+  { left: '15%', duration: '22s', delay: '3s', scale: 1.1 },
+  { left: '25%', duration: '16s', delay: '1s', scale: 0.7 },
+  { left: '35%', duration: '20s', delay: '5s', scale: 0.9 },
+  { left: '45%', duration: '17s', delay: '2s', scale: 1.2 },
+  { left: '55%', duration: '24s', delay: '4s', scale: 0.6 },
+  { left: '63%', duration: '19s', delay: '0.5s', scale: 1.0 },
+  { left: '72%', duration: '21s', delay: '3.5s', scale: 0.8 },
+  { left: '80%', duration: '15s', delay: '1.5s', scale: 1.1 },
+  { left: '88%', duration: '23s', delay: '6s', scale: 0.7 },
+  { left: '12%', duration: '25s', delay: '2.5s', scale: 0.9 },
+  { left: '50%', duration: '18s', delay: '7s', scale: 1.0 },
+  { left: '30%', duration: '20s', delay: '4.5s', scale: 0.8 },
+  { left: '68%', duration: '22s', delay: '1.2s', scale: 1.2 },
+  { left: '92%', duration: '16s', delay: '3.8s', scale: 0.7 },
+];
+
+export default function HomePageClient({ settings }) {
+  const heroHeadline = settings['hero_headline'] || 'Für jeden Anlass den perfekten Ballon';
+  const heroSubtext = settings['hero_subtext'] || 'Willkommen bei Ballonkunst Lahr – Ihrem Spezialgeschäft für Ballons und kreative Geschenkideen im Herzen von Lahr. Wir bringen Farbe in Ihr Leben!';
+  const heroCta1 = settings['hero_cta1'] || 'Jetzt vorbeikommen';
+  const heroCta2 = settings['hero_cta2'] || 'Ballons vorbestellen';
+  const aboutText = settings['about_text'] || 'Bei Ballonkunst Lahr finden Sie eine riesige Auswahl an Ballons für jeden Anlass.';
+  const offerVisible = settings['offer_visible'] === 'true';
+  const offerText = settings['offer_text'] || '';
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-50 via-blue-50 to-yellow-50">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {balloonPositions.map((pos, i) => {
+            const color = balloonColors[i % balloonColors.length];
+            const shape = balloonShapes[i % balloonShapes.length];
+            return (
+              <div
+                key={i}
+                className={`balloon-wrapper ${color}`}
+                style={{ left: pos.left, animationDuration: pos.duration, animationDelay: pos.delay, transform: `scale(${pos.scale})` }}
+              >
+                <div className={shape}><div className="balloon-string"></div></div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="relative container mx-auto px-4 py-32 max-w-7xl text-center z-10">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="text-9xl mb-8 inline-block"
+            >
+              🎈
+            </motion.div>
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              {heroHeadline.includes('perfekten Ballon') ? (
+                <>
+                  Für jeden Anlass den{' '}
+                  <span className="text-primary">perfekten Ballon</span>
+                </>
+              ) : (
+                <span>{heroHeadline}</span>
+              )}
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+              {heroSubtext}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/kontakt"
+                className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-bold text-lg px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              >
+                {heroCta1} <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link
+                href="/anlasse"
+                className="inline-flex items-center justify-center border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                {heroCta2}
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Business Info Banner */}
+      <section className="relative -mt-16 z-20 container mx-auto px-4 max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100"
+        >
+          <div className="flex flex-col items-center text-center px-4">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Award className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">19 Jahre Erfahrung</h3>
+            <p className="text-gray-600">mit Ballons und Dekorationen in Lahr</p>
+          </div>
+          <div className="flex flex-col items-center text-center px-4 pt-8 md:pt-0">
+            <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+              <Layers className="w-8 h-8 text-secondary" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">600+ Themenballons</h3>
+            <p className="text-gray-600">riesige Auswahl für jeden Anlass</p>
+          </div>
+          <div className="flex flex-col items-center text-center px-4 pt-8 lg:pt-0">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+              <Leaf className="w-8 h-8 text-green-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Nachhaltigkeit & Umwelt</h3>
+            <p className="text-gray-600">Auch naturabbaubare Ballons erhältlich</p>
+          </div>
+          <div className="flex flex-col items-center text-center px-4 pt-8 lg:pt-0">
+            <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4">
+              <Clock className="w-8 h-8 text-accent" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Geschenke & Deko</h3>
+            <p className="text-gray-600 font-medium text-primary">Bitte rechtzeitig vorbestellen!</p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Offer Banner (dynamic) */}
+      {offerVisible && offerText && (
+        <section className="py-10 bg-white">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-yellow-50 border border-yellow-300 rounded-2xl p-6 flex flex-col items-center text-center gap-3 shadow-sm"
+            >
+              <div className="flex items-center gap-2 text-yellow-700">
+                <CalendarDays className="w-6 h-6" />
+                <span className="font-bold text-lg">Aktuelle Hinweise</span>
+              </div>
+              <p className="text-yellow-800 leading-relaxed">{offerText}</p>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* About Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Unsere Ballons</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">{aboutText}</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Occasions Grid */}
+      <section className="py-20 bg-gradient-to-br from-pink-50 via-white to-blue-50">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Ballons für jeden Anlass</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Entdecken Sie unsere vielfältige Auswahl für alle besonderen Momente
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          >
+            {occasions.map((occasion, index) => (
+              <Link href={occasion.path} key={index}>
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 text-center cursor-pointer group h-full flex flex-col justify-center"
+                >
+                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {occasion.emoji}
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{occasion.title}</h3>
+                  <p className="text-sm text-gray-600">{occasion.description}</p>
+                </motion.div>
+              </Link>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Gift Ideas */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Kreative Geschenkideen</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Überraschen Sie Ihre Liebsten mit einzigartigen Ballongeschenken! Von Ballonboxen über
+              Ballonsträuße bis hin zu Geldgeschenk-Ballons – bei uns finden Sie das perfekte Geschenk.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Ballonboxen', description: 'Überraschungsboxen gefüllt mit bunten Ballons', icon: '🎁' },
+              { title: 'Ballonsträuße', description: 'Wunderschöne Arrangements für besondere Momente', icon: '💐' },
+              { title: 'Geldgeschenke', description: 'Kreative Verpackungen für Geldgeschenke', icon: '💰' },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-gradient-to-br from-pink-50 to-blue-50 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center"
+              >
+                <div className="text-7xl mb-4">{item.icon}</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/dekoration"
+              className="inline-flex items-center bg-accent hover:bg-accent/90 text-gray-900 font-bold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              Zur Dekoration <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Preview */}
+      <section className="py-20 bg-gradient-to-br from-yellow-50 via-white to-pink-50">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Impressionen</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Lassen Sie sich von unseren kreativen Ballondekorationen inspirieren
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: item * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                className="aspect-square bg-gradient-to-br from-pink-200 to-blue-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
+              >
+                <div className="w-full h-full flex items-center justify-center text-6xl">🎈</div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link
+              href="/galerie"
+              className="inline-flex items-center bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              Zur Galerie <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-20 bg-gradient-to-br from-primary via-secondary to-accent">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center text-white"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Besuchen Sie uns in Lahr!</h2>
+            <p className="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
+              Wir freuen uns auf Ihren Besuch in unserem Geschäft. Lassen Sie sich persönlich beraten
+              und entdecken Sie unsere große Auswahl an Ballons und Geschenkideen.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="flex flex-col items-center">
+                <MapPin className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-bold mb-2">Adresse</h3>
+                <p>{settings['contact_address'] || 'Kaiserstraße 25, 77933 Lahr'}</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <Phone className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-bold mb-2">Telefon</h3>
+                <a href={`tel:${(settings['contact_phone'] || '+49 7821 327082').replace(/\s/g, '')}`} className="hover:underline">
+                  {settings['contact_phone'] || '+49 7821 327082'}
+                </a>
+              </div>
+              <div className="flex flex-col items-center">
+                <MessageCircle className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-bold mb-2">WhatsApp</h3>
+                <a href="https://wa.me/491781510567?text=Hallo%20Ballonkunst%20Lahr%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Ballons!" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  +49 178 1510567
+                </a>
+              </div>
+            </div>
+
+            <Link
+              href="/kontakt"
+              className="inline-flex items-center bg-white text-primary hover:bg-gray-100 font-bold text-lg px-12 py-5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              Kontakt <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+}
