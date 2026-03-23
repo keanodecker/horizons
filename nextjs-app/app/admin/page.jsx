@@ -374,6 +374,7 @@ function GalleryTab({ toast }) {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [caption, setCaption] = useState('');
+  const [dragOver, setDragOver] = useState(false);
   const fileRef = useRef();
 
   useEffect(() => { loadImages(); }, []);
@@ -386,18 +387,30 @@ function GalleryTab({ toast }) {
   }
 
   async function handleUpload(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      toast('Nur Bilddateien erlaubt', 'error');
+      return;
+    }
     setUploading(true);
     try {
       const url = await uploadImage(file, 'gallery');
-      await supabase.from('gallery_images').insert([{ image_url: url, caption: caption.trim() || null }]);
+      const { error } = await supabase.from('gallery_images').insert([{ image_url: url, caption: caption.trim() || null }]);
+      if (error) throw new Error(error.message);
       await fetch('/api/revalidate', { method: 'POST' });
       toast('Bild hochgeladen!', 'success');
       setCaption('');
       loadImages();
-    } catch {
-      toast('Upload fehlgeschlagen', 'error');
+    } catch (err) {
+      toast(`Upload fehlgeschlagen: ${err.message}`, 'error');
     }
     setUploading(false);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleUpload(file);
   }
 
   async function deleteImage(id, imageUrl) {
@@ -430,17 +443,27 @@ function GalleryTab({ toast }) {
           accept="image/*"
           onChange={(e) => e.target.files[0] && handleUpload(e.target.files[0])}
         />
-        <button
-          onClick={() => fileRef.current.click()}
-          disabled={uploading}
-          className="w-full border-2 border-dashed border-pink-300 hover:border-pink-500 hover:bg-pink-50 rounded-xl py-8 flex flex-col items-center gap-3 text-pink-500 font-medium transition disabled:opacity-50"
+        <div
+          onClick={() => !uploading && fileRef.current.click()}
+          onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+          onDragLeave={() => setDragOver(false)}
+          onDrop={handleDrop}
+          className={`w-full border-2 border-dashed rounded-xl py-10 flex flex-col items-center gap-3 font-medium transition cursor-pointer select-none ${
+            uploading
+              ? 'border-pink-200 text-pink-300 cursor-not-allowed opacity-60'
+              : dragOver
+              ? 'border-pink-500 bg-pink-100 text-pink-600 scale-[1.01]'
+              : 'border-pink-300 hover:border-pink-500 hover:bg-pink-50 text-pink-500'
+          }`}
         >
           {uploading ? (
             <><Loader2 className="w-8 h-8 animate-spin" /><span>Wird hochgeladen...</span></>
+          ) : dragOver ? (
+            <><Upload className="w-8 h-8" /><span>Loslassen zum Hochladen</span></>
           ) : (
-            <><Upload className="w-8 h-8" /><span>Bild auswählen</span><span className="text-xs text-gray-400">JPG, PNG, WebP</span></>
+            <><Upload className="w-8 h-8" /><span>Bild hierher ziehen oder klicken</span><span className="text-xs text-gray-400">JPG, PNG, WebP</span></>
           )}
-        </button>
+        </div>
       </div>
 
       {/* Images grid */}
@@ -509,10 +532,10 @@ export default function AdminPage() {
     setSaving(true);
     try {
       await saveSettings(settings);
-      await fetch('/api/revalidate', { method: 'POST' });
+      try { await fetch('/api/revalidate', { method: 'POST' }); } catch (_) {}
       showToast('Einstellungen gespeichert! Website wird aktualisiert.', 'success');
-    } catch {
-      showToast('Fehler beim Speichern', 'error');
+    } catch (err) {
+      showToast(`Fehler beim Speichern: ${err.message}`, 'error');
     }
     setSaving(false);
   }

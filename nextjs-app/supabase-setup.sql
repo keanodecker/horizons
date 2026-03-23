@@ -68,7 +68,8 @@ INSERT INTO site_settings (key, value) VALUES
   ('offer_banner_url',      ''),
   ('contact_phone',         '+49 7821 327082'),
   ('contact_email',         'info@ballonkunst-lahr.de'),
-  ('contact_address',       'Kaiserstraße 25, 77933 Lahr');
+  ('contact_address',       'Kaiserstraße 25, 77933 Lahr'),
+  ('info_box_visible',      'true');
 
 -- 4. Storage Bucket
 -- ─────────────────────────────────────────────────────────────────

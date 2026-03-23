@@ -32,7 +32,8 @@ export async function saveSettings(obj) {
     value: String(value ?? ''),
     updated_at: new Date().toISOString(),
   }));
-  await supabase.from('site_settings').upsert(rows);
+  const { error } = await supabase.from('site_settings').upsert(rows);
+  if (error) throw new Error(error.message);
 }
 
 // ─── Storage helper ───────────────────────────────────────────────────────────
