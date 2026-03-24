@@ -58,7 +58,7 @@ export default function HomePageClient({ settings }) {
   const aboutText = settings['about_text'] || 'Bei Ballonkunst Lahr finden Sie eine riesige Auswahl an Ballons für jeden Anlass.';
   const offerVisible = settings['offer_visible'] === 'true';
   const offerText = settings['offer_text'] || '';
-  const infoBoxVisible = settings['info_box_visible'] !== 'false';
+  const infoBoxVisible = true;
 
   return (
     <>
