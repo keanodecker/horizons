@@ -100,7 +100,7 @@ function Field({ label, fieldKey, type, rows, value, onChange }) {
 }
 
 // ─── Settings Tab ────────────────────────────────────────────────
-function SettingsTab({ settings, onChange, onSave, saving }) {
+function SettingsTab({ settings, onChange, onSave, onReset, saving }) {
   return (
     <div className="space-y-8">
       {/* Hero */}
@@ -208,14 +208,24 @@ function SettingsTab({ settings, onChange, onSave, saving }) {
         </div>
       </section>
 
-      <button
-        onClick={onSave}
-        disabled={saving}
-        className="w-full bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white font-bold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-lg"
-      >
-        {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-        {saving ? 'Wird gespeichert...' : 'Alle Einstellungen speichern'}
-      </button>
+      <div className="flex gap-3">
+        <button
+          onClick={onSave}
+          disabled={saving}
+          className="flex-1 bg-pink-500 hover:bg-pink-600 disabled:bg-pink-300 text-white font-bold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-lg"
+        >
+          {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
+          {saving ? 'Wird gespeichert...' : 'Speichern'}
+        </button>
+        <button
+          onClick={onReset}
+          disabled={saving}
+          className="bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold py-4 px-6 rounded-2xl transition-all"
+          title="Auf Standardwerte zurücksetzen"
+        >
+          Zurücksetzen
+        </button>
+      </div>
     </div>
   );
 }
@@ -498,6 +508,27 @@ function GalleryTab({ toast }) {
   );
 }
 
+const DEFAULT_SETTINGS = {
+  hero_headline:        'Für jeden Anlass den perfekten Ballon',
+  hero_subtext:         'Willkommen bei Ballonkunst Lahr – Ihrem Spezialgeschäft für Ballons und kreative Geschenkideen im Herzen von Lahr. Wir bringen Farbe in Ihr Leben!',
+  hero_cta1:            'Jetzt vorbeikommen',
+  hero_cta2:            'Ballons vorbestellen',
+  about_text:           'Bei Ballonkunst Lahr finden Sie eine riesige Auswahl an Ballons für jeden Anlass. Von klassischen Latexballons über elegante Folienballons bis hin zu personalisierten Ballons mit Beschriftung – wir haben alles, was Ihr Herz begehrt.',
+  about_image_url:      '',
+  hours_mo_di_do_fr_vm: '09:30 – 12:30',
+  hours_mo_di_do_fr_nm: '14:30 – 18:00',
+  hours_mi_closed:      'true',
+  hours_sa:             '09:30 – 13:00',
+  hours_so_closed:      'true',
+  offer_text:           '',
+  offer_visible:        'false',
+  offer_banner_url:     '',
+  contact_phone:        '+49 7821 327082',
+  contact_email:        'info@ballonkunst-lahr.de',
+  contact_address:      'Kaiserstraße 25, 77933 Lahr',
+  info_box_visible:     'true',
+};
+
 // ─── Main Admin Page ─────────────────────────────────────────────
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
@@ -506,6 +537,7 @@ export default function AdminPage() {
   const [loadingSettings, setLoadingSettings] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toastMsg, setToastMsg] = useState(null);
+  const [dbStatus, setDbStatus] = useState(null); // 'ok' | 'error' | null
 
   useEffect(() => {
     if (sessionStorage.getItem('admin_auth') === '1') setAuthed(true);
@@ -517,10 +549,15 @@ export default function AdminPage() {
 
   async function loadAllSettings() {
     setLoadingSettings(true);
-    const { data } = await supabase.from('site_settings').select('key, value');
-    const obj = {};
-    data?.forEach(({ key, value }) => { obj[key] = value; });
-    setSettings(obj);
+    const { data, error } = await supabase.from('site_settings').select('key, value');
+    if (error) {
+      setDbStatus('error');
+    } else {
+      setDbStatus('ok');
+      const obj = {};
+      data?.forEach(({ key, value }) => { obj[key] = value; });
+      setSettings(obj);
+    }
     setLoadingSettings(false);
   }
 
@@ -536,6 +573,20 @@ export default function AdminPage() {
       showToast('Einstellungen gespeichert! Website wird aktualisiert.', 'success');
     } catch (err) {
       showToast(`Fehler beim Speichern: ${err.message}`, 'error');
+    }
+    setSaving(false);
+  }
+
+  async function handleResetToDefaults() {
+    if (!confirm('Alle Einstellungen auf Standardwerte zurücksetzen? Eigene Texte gehen verloren.')) return;
+    setSaving(true);
+    try {
+      await saveSettings(DEFAULT_SETTINGS);
+      setSettings(DEFAULT_SETTINGS);
+      try { await fetch('/api/revalidate', { method: 'POST' }); } catch (_) {}
+      showToast('Auf Standardwerte zurückgesetzt!', 'success');
+    } catch (err) {
+      showToast(`Fehler: ${err.message}`, 'error');
     }
     setSaving(false);
   }
@@ -599,6 +650,16 @@ export default function AdminPage() {
         </div>
       </div>
 
+      {/* DB Status Banner */}
+      {dbStatus === 'error' && (
+        <div className="bg-red-50 border-b border-red-200 px-4 py-3">
+          <div className="max-w-5xl mx-auto flex items-center gap-3 text-red-700 text-sm">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span><strong>Datenbankverbindung fehlgeschlagen.</strong> Änderungen können nicht gespeichert werden. Bitte prüfe die Supabase RLS-Richtlinien und ob die Tabellen existieren.</span>
+          </div>
+        </div>
+      )}
+
       {/* Content */}
       <main className="max-w-5xl mx-auto px-4 py-8">
         {activeTab === 'settings' && (
@@ -608,12 +669,26 @@ export default function AdminPage() {
               Einstellungen werden geladen...
             </div>
           ) : (
-            <SettingsTab
-              settings={settings}
-              onChange={handleSettingChange}
-              onSave={handleSaveSettings}
-              saving={saving}
-            />
+            <>
+              {dbStatus === 'error' && (
+                <div className="mb-6 bg-orange-50 border border-orange-200 rounded-2xl p-5">
+                  <p className="font-bold text-orange-800 mb-2">⚠️ Datenbank nicht erreichbar</p>
+                  <p className="text-sm text-orange-700 mb-3">Führe dieses SQL in Supabase aus um die Verbindung zu reparieren:</p>
+                  <pre className="text-xs bg-white border border-orange-200 rounded-lg p-3 overflow-auto text-gray-800 select-all">{`ALTER TABLE site_settings ENABLE ROW LEVEL SECURITY;
+DO $$ BEGIN
+  CREATE POLICY "allow_all_site_settings" ON site_settings
+  FOR ALL USING (true) WITH CHECK (true);
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;`}</pre>
+                </div>
+              )}
+              <SettingsTab
+                settings={settings}
+                onChange={handleSettingChange}
+                onSave={handleSaveSettings}
+                onReset={handleResetToDefaults}
+                saving={saving}
+              />
+            </>
           )
         )}
         {activeTab === 'blog' && <BlogTab toast={showToast} />}

@@ -32,7 +32,7 @@ export async function saveSettings(obj) {
     value: String(value ?? ''),
     updated_at: new Date().toISOString(),
   }));
-  const { error } = await supabase.from('site_settings').upsert(rows);
+  const { error } = await supabase.from('site_settings').upsert(rows, { onConflict: 'key' });
   if (error) throw new Error(error.message);
 }
 
