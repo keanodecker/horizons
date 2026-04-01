@@ -28,6 +28,10 @@ CREATE TABLE IF NOT EXISTS gallery_images (
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 1b. Migration: category-Spalte für gallery_images (idempotent)
+-- ─────────────────────────────────────────────────────────────────
+ALTER TABLE gallery_images ADD COLUMN IF NOT EXISTS category TEXT;
+
 -- 2. Row Level Security aktivieren & Richtlinien setzen
 -- ─────────────────────────────────────────────────────────────────
 

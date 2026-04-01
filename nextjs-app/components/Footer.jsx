@@ -21,7 +21,7 @@ const Footer = () => {
             key={index}
             className="absolute text-4xl opacity-10"
             style={{ left: balloon.x, bottom: '-50px' }}
-            animate={{ y: [0, -800], x: [0, Math.sin(index) * 50], rotate: [0, 360] }}
+            animate={{ y: [0, -800], x: [0, Math.sin(index) * 50] }}
             transition={{ duration: 15, delay: balloon.delay, repeat: Infinity, ease: 'linear' }}
           >
             🎈

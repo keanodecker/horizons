@@ -98,17 +98,17 @@ export default function GalleryPage() {
 
           <div className="mt-12 bg-white rounded-2xl p-8 text-center border border-gray-200 shadow-sm">
             <div className="text-5xl mb-4">📸</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Mehr Bilder auf Facebook</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Mehr Bilder auf Instagram</h3>
             <p className="text-gray-600 mb-4">
-              Entdecken Sie noch mehr Inspirationen auf unserer Facebook-Seite!
+              Entdecken Sie noch mehr Inspirationen auf unserem Instagram-Profil!
             </p>
             <a
-              href="https://www.facebook.com/profile.php?id=100066701207784"
+              href="https://www.instagram.com/ballonkunst_lahr/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary/90 transition-colors"
             >
-              Zu Facebook
+              Zu Instagram
             </a>
           </div>
         </div>
